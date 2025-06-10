@@ -1,0 +1,62 @@
+﻿@model Knjigarna.Models.Uporabnik
+@{
+    ViewData["Title"] = "Izbriši uporabnika";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow border-danger">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">Izbriši uporabnika</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Ali ste prepričani, da želite izbrisati tega uporabnika? Ta dejanje ni mogoče razveljaviti.
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.DisplayFor(m => m.Ime)
+                            @Html.DisplayFor(m => m.Priimek)
+                            @Html.DisplayFor(m => m.DatumRojstva)
+                        </div>
+                        <div class="col-md-6">
+                            @Html.DisplayFor(m => m.KrajRojstva)
+                            @Html.DisplayFor(m => m.EMSO)
+                            @Html.DisplayFor(m => m.Email)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.DisplayFor(m => m.Starost)
+                            @Html.DisplayFor(m => m.JeAktiven)
+                        </div>
+                        <div class="col-md-6">
+                            @Html.DisplayFor(m => m.DatumRegistracije)
+                        </div>
+                    </div>
+
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger mt-3">
+                            @TempData["ErrorMessage"]
+                        </div>
+                    }
+
+                    <form asp-action="Delete" method="post" class="text-center mt-4">
+                        <input type="hidden" asp-for="Id" />
+                        <button type="submit" class="btn btn-danger btn-lg me-2">
+                            <i class="fas fa-trash"></i> Da, izbriši
+                        </button>
+                        <a asp-action="Index" class="btn btn-secondary btn-lg">
+                            <i class="fas fa-arrow-left"></i> Prekliči
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,191 @@
+﻿@model Knjigarna.Models.TabObrazecModel
+@{
+    ViewData["Title"] = "Obrazec za registracijo";
+}
+
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4>Obrazec za registracijo</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Submit" method="post" id="registrationForm">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <!-- Zavihki - jQuery UI tabs -->
+                        <div id="tabs">
+                            <ul>
+                                <li><a href="#tabs-1">Osebni podatki</a></li>
+                                <li><a href="#tabs-2">Kontaktni podatki</a></li>
+                                <li><a href="#tabs-3">Uporabniški račun</a></li>
+                            </ul>
+
+                            <!-- Zavihek 1: Osebni podatki -->
+                            <div id="tabs-1">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Ime" class="control-label"></label>
+                                            <input asp-for="Ime" class="form-control" />
+                                            <span asp-validation-for="Ime" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Priimek" class="control-label"></label>
+                                            <input asp-for="Priimek" class="form-control" />
+                                            <span asp-validation-for="Priimek" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="DatumRojstva" class="control-label"></label>
+                                            <input asp-for="DatumRojstva" class="form-control" type="date" />
+                                            <span asp-validation-for="DatumRojstva" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="KrajRojstva" class="control-label"></label>
+                                            <select asp-for="KrajRojstva" class="form-control">
+                                                <option value="">-- Izberite kraj rojstva --</option>
+                                                <option value="Ljubljana">Ljubljana</option>
+                                                <option value="Maribor">Maribor</option>
+                                                <option value="Celje">Celje</option>
+                                                <option value="Kranj">Kranj</option>
+                                                <option value="Koper">Koper</option>
+                                                <option value="Novo mesto">Novo mesto</option>
+                                                <option value="Nova Gorica">Nova Gorica</option>
+                                                <option value="Murska Sobota">Murska Sobota</option>
+                                            </select>
+                                            <span asp-validation-for="KrajRojstva" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="EMSO" class="control-label"></label>
+                                            <input asp-for="EMSO" class="form-control" />
+                                            <span asp-validation-for="EMSO" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-end mt-3">
+                                    <button type="button" class="btn btn-primary next-tab">Naprej</button>
+                                </div>
+                            </div>
+
+                            <!-- Zavihek 2: Kontaktni podatki -->
+                            <div id="tabs-2">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Email" class="control-label"></label>
+                                            <input asp-for="Email" class="form-control" type="email" />
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col d-flex justify-content-between">
+                                        <button type="button" class="btn btn-secondary prev-tab">Nazaj</button>
+                                        <button type="button" class="btn btn-primary next-tab">Naprej</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Zavihek 3: Uporabniški račun -->
+                            <div id="tabs-3">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Geslo" class="control-label"></label>
+                                            <input asp-for="Geslo" class="form-control" type="password" />
+                                            <small class="form-text text-muted">Geslo mora vsebovati vsaj eno številko in en poseben znak.</small>
+                                            <span asp-validation-for="Geslo" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="PonovitevGesla" class="control-label"></label>
+                                            <input asp-for="PonovitevGesla" class="form-control" type="password" />
+                                            <span asp-validation-for="PonovitevGesla" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col d-flex justify-content-between">
+                                        <button type="button" class="btn btn-secondary prev-tab">Nazaj</button>
+                                        <button type="submit" class="btn btn-success">Oddaj obrazec</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(function() {
+            // Inicializacija zavihkov
+            $("#tabs").tabs();
+
+            // Gumbi za navigacijo med zavihki
+            $(".next-tab").click(function() {
+                var currentTabIndex = $("#tabs").tabs("option", "active");
+                var tabCount = $("#tabs ul li").length;
+
+                // Shranjujemo podatke vsakič, ko gremo na naslednji zavihek
+                saveFormData();
+
+                // Premik na naslednji zavihek
+                $("#tabs").tabs("option", "active", currentTabIndex + 1);
+            });
+
+            $(".prev-tab").click(function() {
+                var currentTabIndex = $("#tabs").tabs("option", "active");
+
+                // Premik na prejšnji zavihek
+                $("#tabs").tabs("option", "active", currentTabIndex - 1);
+            });
+
+            // Funkcija za shranjevanje vmesnih podatkov preko AJAX
+            function saveFormData() {
+                var formData = $("#registrationForm").serialize();
+
+                $.ajax({
+                    url: "@Url.Action("SavePartial", "Obrazec")",
+                    type: "POST",
+                    data: formData,
+                    success: function(response) {
+                        if (response.success) {
+                            console.log("Podatki uspešno shranjeni");
+                        }
+                    },
+                    error: function() {
+                        console.error("Napaka pri shranjevanju podatkov");
+                    }
+                });
+            }
+        });
+    </script>
+}

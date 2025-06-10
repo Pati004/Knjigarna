@@ -1,0 +1,45 @@
+﻿@model string
+
+@{
+    var isRequired = ViewData.ModelMetadata.IsRequired;
+    var placeholder = "Vnesite " + ViewData.ModelMetadata.GetDisplayName().ToLower();
+    var description = ViewData.ModelMetadata.Description;
+
+    // Preveri, če obstaja DataType atribut
+    var dataTypeAttr = ViewData.ModelMetadata.DataTypeName;
+    var inputType = "text";
+
+    if (dataTypeAttr == "Password")
+    {
+        inputType = "password";
+    }
+    else if (dataTypeAttr == "EmailAddress")
+    {
+        inputType = "email";
+    }
+    else if (dataTypeAttr == "PhoneNumber")
+    {
+        inputType = "tel";
+    }
+    else if (dataTypeAttr == "Url")
+    {
+        inputType = "url";
+    }
+}
+
+<div class="form-group">
+    <label class="control-label" for="@ViewData.ModelMetadata.PropertyName">
+        @ViewData.ModelMetadata.GetDisplayName()
+        @if (isRequired)
+        {
+            <span class="text-danger">*</span>
+        }
+    </label>
+    <input type="@inputType" class="form-control" id="@ViewData.ModelMetadata.PropertyName"
+           name="@ViewData.ModelMetadata.PropertyName" value="@Model" placeholder="@placeholder" />
+    @if (!string.IsNullOrEmpty(description))
+    {
+        <small class="form-text text-muted">@description</small>
+    }
+    <span class="text-danger field-validation-valid" data-valmsg-for="@ViewData.ModelMetadata.PropertyName" data-valmsg-replace="true"></span>
+</div>

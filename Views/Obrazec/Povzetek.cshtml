@@ -1,0 +1,63 @@
+﻿@model Knjigarna.Models.TabObrazecModel
+@{
+    ViewData["Title"] = "Povzetek podatkov";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h4>Povzetek vnesenih podatkov</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle"></i> Obrazec je bil uspešno oddan. Spodaj so vneseni podatki.
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Osebni podatki</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><strong>Ime:</strong> @Model.Ime</p>
+                                    <p><strong>Priimek:</strong> @Model.Priimek</p>
+                                    <p><strong>Datum rojstva:</strong> @Model.DatumRojstva.ToString("dd.MM.yyyy")</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Kraj rojstva:</strong> @Model.KrajRojstva</p>
+                                    <p><strong>EMŠO:</strong> @Model.EMSO</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Kontaktni podatki</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>E-naslov:</strong> @Model.Email</p>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Uporabniški račun</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Geslo:</strong> ********</p>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Nazaj na domačo stran</a>
+                        <a asp-controller="Obrazec" asp-action="Index" class="btn btn-outline-primary ml-2">Nov obrazec</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

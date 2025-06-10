@@ -1,0 +1,55 @@
+﻿@model decimal?
+
+@{
+    var min = 0.0m;
+    var max = 1000.0m;
+    var step = 0.01m;
+
+    // Preveri, če obstaja atribut za Range
+    var rangeAttr = ViewData.ModelMetadata.ValidatorMetadata
+        .OfType<System.ComponentModel.DataAnnotations.RangeAttribute>()
+        .FirstOrDefault();
+
+    if (rangeAttr != null)
+    {
+        min = Convert.ToDecimal(rangeAttr.Minimum);
+        max = Convert.ToDecimal(rangeAttr.Maximum);
+    }
+
+    var value = Model ?? min;
+    var isRequired = ViewData.ModelMetadata.IsRequired;
+    var description = ViewData.ModelMetadata.Description;
+
+    // Formatiranje za prikaz v euro
+    var isEuroFormat = ViewData.ModelMetadata.GetDisplayName().Contains("€") ||
+                      ViewData.ModelMetadata.GetDisplayName().ToLower().Contains("cena");
+}
+
+<div class="form-group">
+    <label class="control-label" for="@ViewData.ModelMetadata.PropertyName">
+        @ViewData.ModelMetadata.GetDisplayName()
+        @if (isRequired)
+        {
+            <span class="text-danger">*</span>
+        }
+    </label>
+    <div class="input-group">
+        @if (isEuroFormat)
+        {
+            <div class="input-group-prepend">
+                <span class="input-group-text">€</span>
+            </div>
+        }
+        <input type="number" id="@ViewData.ModelMetadata.PropertyName" name="@ViewData.ModelMetadata.PropertyName"
+               value="@value.ToString("F2", System.Globalization.CultureInfo.InvariantCulture)"
+               class="form-control"
+               min="@min.ToString("F2", System.Globalization.CultureInfo.InvariantCulture)"
+               max="@max.ToString("F2", System.Globalization.CultureInfo.InvariantCulture)"
+               step="@step.ToString("F2", System.Globalization.CultureInfo.InvariantCulture)" />
+    </div>
+    @if (!string.IsNullOrEmpty(description))
+    {
+        <small class="form-text text-muted">@description</small>
+    }
+    <span class="text-danger field-validation-valid" data-valmsg-for="@ViewData.ModelMetadata.PropertyName" data-valmsg-replace="true"></span>
+</div>

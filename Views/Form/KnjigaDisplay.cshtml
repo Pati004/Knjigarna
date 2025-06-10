@@ -1,0 +1,78 @@
+﻿@model Knjigarna.Models.FormModels.KnjigaModel
+@{
+    ViewData["Title"] = "Pregled knjige";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h4>Pregled dodane knjige (DisplayForModel)</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-success mb-4">
+                        <i class="fas fa-check-circle"></i> Knjiga je bila uspešno dodana v katalog. Spodaj je pregled vnesenih podatkov.
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card mb-4">
+                                <div class="card-header bg-secondary text-white">
+                                    <h5 class="mb-0">Osnovni podatki o knjigi</h5>
+                                </div>
+                                <div class="card-body display-container">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            @Html.DisplayFor(m => m.ISBN)
+                                            @Html.DisplayFor(m => m.Naslov)
+                                            @Html.DisplayFor(m => m.Avtor)
+                                        </div>
+                                        <div class="col-md-6">
+                                            @Html.DisplayFor(m => m.LetoIzdaje)
+                                            @Html.DisplayFor(m => m.Kategorija)
+                                            @Html.DisplayFor(m => m.SteviloStrani)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mb-4">
+                                <div class="card-header bg-secondary text-white">
+                                    <h5 class="mb-0">Prodajni podatki</h5>
+                                </div>
+                                <div class="card-body display-container">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            @Html.DisplayFor(m => m.Cena)
+                                            @Html.DisplayFor(m => m.Zaloga)
+                                            @Html.DisplayFor(m => m.JeNaVoljo)
+                                        </div>
+                                        <div class="col-md-6">
+                                            @Html.DisplayFor(m => m.DatumIzida)
+                                            @Html.DisplayFor(m => m.Ocena)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mb-4">
+                                <div class="card-header bg-secondary text-white">
+                                    <h5 class="mb-0">Opis knjige</h5>
+                                </div>
+                                <div class="card-body display-container">
+                                    @Html.DisplayFor(m => m.Opis)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a asp-action="KnjigaEdit" class="btn btn-primary">Dodaj novo knjigo</a>
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary ml-2">Nazaj na domačo stran</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

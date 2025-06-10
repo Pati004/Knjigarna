@@ -1,0 +1,15 @@
+﻿@model string
+
+<div class="display-field">
+    <label class="display-label">@ViewData.ModelMetadata.GetDisplayName()</label>
+    <div class="display-value">
+        @if (!string.IsNullOrEmpty(Model))
+        {
+            @Model
+        }
+        else
+        {
+            <span class="text-muted">Ni podatka</span>
+        }
+    </div>
+</div>

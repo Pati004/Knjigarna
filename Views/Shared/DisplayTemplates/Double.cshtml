@@ -1,0 +1,36 @@
+﻿@model double?
+
+@{
+    var format = "F2"; // Format z dvemi decimalkami
+
+    // Preveri, če obstaja DisplayFormat atribut
+    var displayFormatAttr = ViewData.ModelMetadata.ValidatorMetadata
+        .OfType<System.ComponentModel.DataAnnotations.DisplayFormatAttribute>()
+        .FirstOrDefault();
+
+    if (displayFormatAttr != null && !string.IsNullOrEmpty(displayFormatAttr.DataFormatString))
+    {
+        format = displayFormatAttr.DataFormatString;
+    }
+}
+
+<div class="display-field">
+    <label class="display-label">@ViewData.ModelMetadata.GetDisplayName()</label>
+    <div class="display-value">
+        @if (Model.HasValue)
+        {
+            if (format.Contains("C"))
+            {
+                @string.Format(format, Model.Value)
+            }
+            else
+            {
+                @Model.Value.ToString(format)
+            }
+        }
+        else
+        {
+            <span class="text-muted">Ni podatka</span>
+        }
+    </div>
+</div>

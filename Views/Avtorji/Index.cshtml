@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Avtor>
+@{
+    ViewData["Title"] = "Avtorji";
+}
+
+<h1>Seznam avtorjev</h1>
+
+<div class="row">
+    @foreach (var avtor in Model)
+    {
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h5 class="card-title">@avtor.PolnoIme</h5>
+                </div>
+                <div class="card-body">
+                    <div class="autor-info">
+                        <p><strong>Datum rojstva:</strong> @(avtor.DatumRojstva?.ToString("d. MMMM yyyy") ?? "Ni podatka")</p>
+                        <p><strong>Država:</strong> @avtor.Drzava</p>
+                        <p class="text-justify"><strong>Biografija:</strong> @avtor.Biografija</p>
+                    </div>
+                    <div class="autor-accordion mt-3">
+                        <h3>Več o avtorju</h3>
+                        <div>
+                            <p class="text-justify">
+                                @avtor.PolnoIme je ustvaril številna pomembna dela, ki so zaznamovala literarni svet.
+                                Njegov stil pisanja je prepoznaven po @(avtor.Id % 2 == 0 ? "bogatem jeziku in podrobnih opisih" : "jasni strukturi in globokih sporočilih").
+                                Med bralci je priljubljen zaradi svoje @(avtor.Id % 3 == 0 ? "inovativnosti in svežine" : "globine in avtentičnosti").
+                            </p>
+                            <p class="text-justify">
+                                Njegova dela so bila prevedena v številne jezike in so navdihnila številne druge umetnike.
+                                V svojem ustvarjanju se pogosto dotika tem kot so @(avtor.Id % 4 == 0 ? "ljubezen, izguba in odrešitev" : "moč, znanje in moralna odgovornost").
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            $(".autor-accordion").accordion({
+                collapsible: true,
+                active: false,
+                heightStyle: "content"
+            });
+        });
+    </script>
+}

@@ -1,0 +1,27 @@
+﻿@model decimal?
+
+@{
+    var isEuroFormat = ViewData.ModelMetadata.GetDisplayName().Contains("€") ||
+                      ViewData.ModelMetadata.GetDisplayName().ToLower().Contains("cena");
+}
+
+<div class="display-field">
+    <label class="display-label">@ViewData.ModelMetadata.GetDisplayName()</label>
+    <div class="display-value">
+        @if (Model.HasValue)
+        {
+            if (isEuroFormat)
+            {
+                @(Model.Value.ToString("C2", new System.Globalization.CultureInfo("sl-SI")))
+            }
+            else
+            {
+                @Model.Value.ToString("F2")
+            }
+        }
+        else
+        {
+            <span class="text-muted">Ni podatka</span>
+        }
+    </div>
+</div>

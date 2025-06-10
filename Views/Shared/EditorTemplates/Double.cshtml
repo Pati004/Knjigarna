@@ -1,0 +1,71 @@
+﻿@model double?
+
+@{
+    var min = 0.0;
+    var max = 1000.0;
+    var step = 0.1;
+
+    // Preveri, če obstaja atribut za Range
+    var rangeAttr = ViewData.ModelMetadata.ValidatorMetadata
+        .OfType<System.ComponentModel.DataAnnotations.RangeAttribute>()
+        .FirstOrDefault();
+
+    if (rangeAttr != null)
+    {
+        min = Convert.ToDouble(rangeAttr.Minimum);
+        max = Convert.ToDouble(rangeAttr.Maximum);
+    }
+
+    var value = Model ?? min;
+    var isRequired = ViewData.ModelMetadata.IsRequired;
+    var description = ViewData.ModelMetadata.Description;
+
+    // Kulturo nastavimo na en-US, da zagotovimo pravilno obliko decimalnih števil (pika namesto vejice)
+    var culture = new System.Globalization.CultureInfo("en-US");
+}
+
+<div class="form-group">
+    <label class="control-label" for="@ViewData.ModelMetadata.PropertyName">
+        @ViewData.ModelMetadata.GetDisplayName()
+        @if (isRequired)
+        {
+            <span class="text-danger">*</span>
+        }
+    </label>
+    <div class="d-flex align-items-center mb-2">
+        <div class="slider-control flex-grow-1 me-3" id="@ViewData.ModelMetadata.PropertyName-slider"></div>
+        <input type="number" id="@ViewData.ModelMetadata.PropertyName" name="@ViewData.ModelMetadata.PropertyName"
+               value="@value.ToString(culture)" class="form-control" style="width: 100px;"
+               min="@min.ToString(culture)" max="@max.ToString(culture)" step="@step.ToString(culture)" />
+    </div>
+    @if (!string.IsNullOrEmpty(description))
+    {
+        <small class="form-text text-muted">@description</small>
+    }
+    <span class="text-danger field-validation-valid" data-valmsg-for="@ViewData.ModelMetadata.PropertyName" data-valmsg-replace="true"></span>
+</div>
+
+<script>
+    $(function() {
+        var sliderId = "#@ViewData.ModelMetadata.PropertyName-slider";
+        var inputId = "#@ViewData.ModelMetadata.PropertyName";
+
+        $(sliderId).slider({
+            range: "min",
+            min: @min.ToString(culture),
+            max: @max.ToString(culture),
+            step: @step.ToString(culture),
+            value: @value.ToString(culture),
+            slide: function(event, ui) {
+                $(inputId).val(ui.value);
+            }
+        });
+
+        $(inputId).on("change", function() {
+            var newValue = parseFloat($(this).val());
+            if (newValue >= @min.ToString(culture) && newValue <= @max.ToString(culture)) {
+                $(sliderId).slider("value", newValue);
+            }
+        });
+    });
+</script>

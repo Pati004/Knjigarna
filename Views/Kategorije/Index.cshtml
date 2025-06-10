@@ -1,0 +1,132 @@
+﻿@model IEnumerable<Kategorija>
+@{
+    ViewData["Title"] = "Kategorije";
+}
+
+<h1>Seznam kategorij</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <div id="kategorije-accordion">
+            @foreach (var kategorija in Model)
+            {
+                <h3>@kategorija.Ime</h3>
+                <div>
+                    <p class="text-justify">@kategorija.Opis</p>
+                    <div class="kategorija-info">
+                        <h5>Znani avtorji te kategorije:</h5>
+                        <ul>
+                            @{
+                                // To so statični podatki za prikaz
+                                var avtorji = new List<string>();
+
+                                if (kategorija.Id == 1) // Fantazija
+                                {
+                                    avtorji.Add("J.R.R. Tolkien");
+                                    avtorji.Add("J.K. Rowling");
+                                    avtorji.Add("George R.R. Martin");
+                                }
+                                else if (kategorija.Id == 2) // Znanstvena fantastika
+                                {
+                                    avtorji.Add("Isaac Asimov");
+                                    avtorji.Add("Arthur C. Clarke");
+                                    avtorji.Add("Frank Herbert");
+                                }
+                                else if (kategorija.Id == 3) // Klasična literatura
+                                {
+                                    avtorji.Add("Franz Kafka");
+                                    avtorji.Add("Fjodor Dostojevski");
+                                    avtorji.Add("Jane Austen");
+                                }
+                                else if (kategorija.Id == 4) // Distopija
+                                {
+                                    avtorji.Add("George Orwell");
+                                    avtorji.Add("Aldous Huxley");
+                                    avtorji.Add("Ray Bradbury");
+                                }
+                                else if (kategorija.Id == 5) // Kriminalka
+                                {
+                                    avtorji.Add("Agatha Christie");
+                                    avtorji.Add("Arthur Conan Doyle");
+                                    avtorji.Add("Jo Nesbø");
+                                }
+                                else if (kategorija.Id == 6) // Biografija
+                                {
+                                    avtorji.Add("Walter Isaacson");
+                                    avtorji.Add("Doris Kearns Goodwin");
+                                    avtorji.Add("Ron Chernow");
+                                }
+
+                                foreach (var avtor in avtorji)
+                                {
+                                    <li>@avtor</li>
+                                }
+                            }
+                        </ul>
+                        <h5>Znana dela:</h5>
+                        <ul>
+                            @{
+                                // To so statični podatki za prikaz
+                                var dela = new List<string>();
+
+                                if (kategorija.Id == 1) // Fantazija
+                                {
+                                    dela.Add("Gospodar prstanov");
+                                    dela.Add("Harry Potter");
+                                    dela.Add("Pesem ledu in ognja");
+                                }
+                                else if (kategorija.Id == 2) // Znanstvena fantastika
+                                {
+                                    dela.Add("Fundacija");
+                                    dela.Add("2001: Vesoljska odiseja");
+                                    dela.Add("Dune");
+                                }
+                                else if (kategorija.Id == 3) // Klasična literatura
+                                {
+                                    dela.Add("Proces");
+                                    dela.Add("Zločin in kazen");
+                                    dela.Add("Prevzetnost in pristranost");
+                                }
+                                else if (kategorija.Id == 4) // Distopija
+                                {
+                                    dela.Add("1984");
+                                    dela.Add("Krasni novi svet");
+                                    dela.Add("Fahrenheit 451");
+                                }
+                                else if (kategorija.Id == 5) // Kriminalka
+                                {
+                                    dela.Add("Umor v Orient Expressu");
+                                    dela.Add("Študija v škrlatnem");
+                                    dela.Add("Snežak");
+                                }
+                                else if (kategorija.Id == 6) // Biografija
+                                {
+                                    dela.Add("Steve Jobs");
+                                    dela.Add("Team of Rivals");
+                                    dela.Add("Alexander Hamilton");
+                                }
+
+                                foreach (var delo in dela)
+                                {
+                                    <li>@delo</li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            $("#kategorije-accordion").accordion({
+                collapsible: true,
+                heightStyle: "content",
+                active: false
+            });
+        });
+    </script>
+}

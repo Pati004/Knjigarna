@@ -1,0 +1,92 @@
+﻿@model Knjigarna.Models.Registracija.Korak1Model
+@{
+    ViewData["Title"] = "Registracija - Korak 1";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card mt-4">
+                <div class="card-header bg-primary text-white">
+                    <h4>Registracija uporabnika - Korak 1/4</h4>
+                </div>
+                <div class="card-body">
+                    <div class="progress mb-4">
+                        <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                    </div>
+
+                    <form asp-action="Korak1" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label asp-for="Ime" class="control-label"></label>
+                                    <input asp-for="Ime" class="form-control" />
+                                    <span asp-validation-for="Ime" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label asp-for="Priimek" class="control-label"></label>
+                                    <input asp-for="Priimek" class="form-control" />
+                                    <span asp-validation-for="Priimek" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label asp-for="DatumRojstva" class="control-label"></label>
+                                    <input asp-for="DatumRojstva" class="form-control" type="date" />
+                                    <span asp-validation-for="DatumRojstva" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label asp-for="EMSO" class="control-label"></label>
+                                    <input asp-for="EMSO" class="form-control" />
+                                    <span asp-validation-for="EMSO" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label asp-for="Starost" class="control-label"></label>
+                            <div class="d-flex align-items-center">
+                                <div id="starost-slider" class="flex-grow-1 me-3"></div>
+                                <input asp-for="Starost" class="form-control" style="width: 70px;" readonly />
+                            </div>
+                            <span asp-validation-for="Starost" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group text-end">
+                            <button type="submit" class="btn btn-primary">Naprej <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(function() {
+            $("#starost-slider").slider({
+                range: "min",
+                min: 18,
+                max: 100,
+                value: @(Model?.Starost > 0 ? Model.Starost : 18),
+                slide: function(event, ui) {
+                    $("#Starost").val(ui.value);
+                }
+            });
+            // Nastavimo začetno vrednost v polje
+            $("#Starost").val($("#starost-slider").slider("value"));
+        });
+    </script>
+}

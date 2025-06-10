@@ -1,0 +1,73 @@
+﻿@model Knjigarna.Models.Registracija.Korak2Model
+@{
+    ViewData["Title"] = "Registracija - Korak 2";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card mt-4">
+                <div class="card-header bg-primary text-white">
+                    <h4>Registracija uporabnika - Korak 2/4</h4>
+                </div>
+                <div class="card-body">
+                    <div class="progress mb-4">
+                        <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                    </div>
+
+                    <form asp-action="Korak2" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Naslov" class="control-label"></label>
+                            <input asp-for="Naslov" class="form-control" />
+                            <span asp-validation-for="Naslov" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label asp-for="PostnaStevilka" class="control-label"></label>
+                                    <input asp-for="PostnaStevilka" class="form-control" />
+                                    <span asp-validation-for="PostnaStevilka" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label asp-for="Posta" class="control-label"></label>
+                                    <input asp-for="Posta" class="form-control" />
+                                    <span asp-validation-for="Posta" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label asp-for="Drzava" class="control-label"></label>
+                            <select asp-for="Drzava" class="form-control">
+                                <option value="">-- Izberite državo --</option>
+                                <option value="Slovenija">Slovenija</option>
+                                <option value="Hrvaška">Hrvaška</option>
+                                <option value="Avstrija">Avstrija</option>
+                                <option value="Italija">Italija</option>
+                                <option value="Madžarska">Madžarska</option>
+                                <option value="Nemčija">Nemčija</option>
+                                <option value="Drugo">Drugo</option>
+                            </select>
+                            <span asp-validation-for="Drzava" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group text-end">
+                            <button type="submit" class="btn btn-primary">Naprej <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

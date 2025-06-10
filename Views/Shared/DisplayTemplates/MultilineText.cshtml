@@ -1,0 +1,19 @@
+﻿@model string
+
+<div class="display-field">
+    <label class="display-label">@ViewData.ModelMetadata.GetDisplayName()</label>
+    <div class="display-value multiline-text">
+        @if (!string.IsNullOrEmpty(Model))
+        {
+            @foreach (var line in Model.Split(Environment.NewLine))
+            {
+                @line
+                <br />
+            }
+        }
+        else
+        {
+            <span class="text-muted">Ni podatka</span>
+        }
+    </div>
+</div>

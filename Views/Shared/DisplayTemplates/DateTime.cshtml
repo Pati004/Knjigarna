@@ -1,0 +1,29 @@
+﻿@model DateTime?
+
+@{
+    var format = "dd.MM.yyyy";
+
+    // Preveri, če obstaja DisplayFormat atribut
+    var displayFormatAttr = ViewData.ModelMetadata.ValidatorMetadata
+        .OfType<System.ComponentModel.DataAnnotations.DisplayFormatAttribute>()
+        .FirstOrDefault();
+
+    if (displayFormatAttr != null && !string.IsNullOrEmpty(displayFormatAttr.DataFormatString))
+    {
+        format = displayFormatAttr.DataFormatString.Replace("{0:", "").Replace("}", "");
+    }
+}
+
+<div class="display-field">
+    <label class="display-label">@ViewData.ModelMetadata.GetDisplayName()</label>
+    <div class="display-value">
+        @if (Model.HasValue)
+        {
+            @Model.Value.ToString(format)
+        }
+        else
+        {
+            <span class="text-muted">Ni podatka</span>
+        }
+    </div>
+</div>

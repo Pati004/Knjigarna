@@ -1,0 +1,76 @@
+﻿@model Knjigarna.Models.FormModels.EditorObrazecModel
+@{
+    ViewData["Title"] = "Registracija uporabnika";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4>Obrazec za registracijo uporabnika (EditorForModel)</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> Prosimo, izpolnite spodnji obrazec za registracijo. Polja označena z <span class="text-danger">*</span> so obvezna.
+                    </div>
+
+                    <form asp-action="ObrazecSubmit" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card mb-4">
+                                    <div class="card-header bg-secondary text-white">
+                                        <h5 class="mb-0">Osebni podatki</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(m => m.Ime)
+                                                @Html.EditorFor(m => m.Priimek)
+                                                @Html.EditorFor(m => m.DatumRojstva)
+                                            </div>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(m => m.KrajRojstva)
+                                                @Html.EditorFor(m => m.EMSO)
+                                                @Html.EditorFor(m => m.Starost)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card mb-4">
+                                    <div class="card-header bg-secondary text-white">
+                                        <h5 class="mb-0">Podatki za prijavo</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(m => m.Email)
+                                            </div>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(m => m.Geslo)
+                                                @Html.EditorFor(m => m.PonovitevGesla)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg">Oddaj obrazec</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

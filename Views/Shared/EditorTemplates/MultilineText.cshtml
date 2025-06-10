@@ -1,0 +1,24 @@
+﻿@model string
+
+@{
+    var isRequired = ViewData.ModelMetadata.IsRequired;
+    var placeholder = "Vnesite " + ViewData.ModelMetadata.GetDisplayName().ToLower();
+    var description = ViewData.ModelMetadata.Description;
+}
+
+<div class="form-group">
+    <label class="control-label" for="@ViewData.ModelMetadata.PropertyName">
+        @ViewData.ModelMetadata.GetDisplayName()
+        @if (isRequired)
+        {
+            <span class="text-danger">*</span>
+        }
+    </label>
+    <textarea class="form-control" id="@ViewData.ModelMetadata.PropertyName" 
+              name="@ViewData.ModelMetadata.PropertyName" rows="5" placeholder="@placeholder">@Model</textarea>
+    @if (!string.IsNullOrEmpty(description))
+    {
+        <small class="form-text text-muted">@description</small>
+    }
+    <span class="text-danger field-validation-valid" data-valmsg-for="@ViewData.ModelMetadata.PropertyName" data-valmsg-replace="true"></span>
+</div>

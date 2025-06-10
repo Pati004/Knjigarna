@@ -1,0 +1,64 @@
+﻿@model Knjigarna.Models.Registracija.RegistracijaModel
+@{
+    ViewData["Title"] = "Registracija - Povzetek";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card mt-4">
+                <div class="card-header bg-success text-white">
+                    <h4>Registracija uporabnika - Povzetek</h4>
+                </div>
+                <div class="card-body">
+                    <div class="progress mb-4">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+                    </div>
+
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle"></i> Uspešno ste izpolnili vsa polja. Spodaj je povzetek vaših podatkov.
+                    </div>
+
+                    <div class="border rounded p-3 mb-4">
+                        <h5 class="border-bottom pb-2">Osebni podatki</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Ime:</strong> @Model.Ime</p>
+                                <p><strong>Priimek:</strong> @Model.Priimek</p>
+                                <p><strong>Datum rojstva:</strong> @Model.DatumRojstva.ToString("dd.MM.yyyy")</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>EMŠO:</strong> @Model.EMSO</p>
+                                <p><strong>Starost:</strong> @Model.Starost let</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border rounded p-3 mb-4">
+                        <h5 class="border-bottom pb-2">Naslov</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Naslov:</strong> @Model.Naslov</p>
+                                <p><strong>Poštna številka:</strong> @Model.PostnaStevilka</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Pošta:</strong> @Model.Posta</p>
+                                <p><strong>Država:</strong> @Model.Drzava</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border rounded p-3 mb-4">
+                        <h5 class="border-bottom pb-2">Podatki za prijavo</h5>
+                        <p><strong>E-naslov:</strong> @Model.Email</p>
+                        <p><strong>Geslo:</strong> ••••••••</p>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a asp-action="Zakljuci" class="btn btn-primary">Zaključi registracijo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Knjiga>
+@{
+    ViewData["Title"] = "Knjige";
+}
+
+<h1>Seznam knjig</h1>
+
+<div class="row">
+    @foreach (var knjiga in Model)
+    {
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h5 class="card-title">@knjiga.Naslov</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@knjiga.Avtor.PolnoIme</h6>
+                </div>
+                <div class="card-body">
+                    <p class="card-text text-justify">@knjiga.Opis</p>
+                    <div class="details-accordion">
+                        <h3>Podrobnosti</h3>
+                        <div>
+                            <p><strong>Leto izdaje:</strong> @knjiga.LetoIzdaje</p>
+                            <p><strong>Število strani:</strong> @knjiga.SteviloStrani</p>
+                            <p><strong>Kategorija:</strong> @knjiga.Kategorija.Ime</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="badge badge-primary">@knjiga.Kategorija.Ime</span>
+                        <span class="text-success font-weight-bold">@knjiga.Cena.ToString("C")</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            $(".details-accordion").accordion({
+                collapsible: true,
+                active: false,
+                heightStyle: "content"
+            });
+        });
+    </script>
+}

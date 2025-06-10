@@ -1,0 +1,87 @@
+﻿@model Knjigarna.Models.FormModels.KnjigaModel
+@{
+    ViewData["Title"] = "Dodajanje knjige";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4>Obrazec za dodajanje knjige (EditorForModel)</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> Izpolnite obrazec za dodajanje nove knjige v katalog. Polja označena z <span class="text-danger">*</span> so obvezna.
+                    </div>
+
+                    <form asp-action="KnjigaSubmit" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card mb-4">
+                                    <div class="card-header bg-secondary text-white">
+                                        <h5 class="mb-0">Osnovni podatki o knjigi</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(m => m.ISBN)
+                                                @Html.EditorFor(m => m.Naslov)
+                                                @Html.EditorFor(m => m.Avtor)
+                                            </div>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(m => m.LetoIzdaje)
+                                                @Html.EditorFor(m => m.Kategorija)
+                                                @Html.EditorFor(m => m.SteviloStrani)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card mb-4">
+                                    <div class="card-header bg-secondary text-white">
+                                        <h5 class="mb-0">Prodajni podatki</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(m => m.Cena)
+                                                @Html.EditorFor(m => m.Zaloga)
+                                                @Html.EditorFor(m => m.JeNaVoljo)
+                                            </div>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(m => m.DatumIzida)
+                                                @Html.EditorFor(m => m.Ocena)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card mb-4">
+                                    <div class="card-header bg-secondary text-white">
+                                        <h5 class="mb-0">Opis knjige</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        @Html.EditorFor(m => m.Opis)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg">Dodaj knjigo</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

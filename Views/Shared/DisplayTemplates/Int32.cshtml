@@ -1,0 +1,15 @@
+﻿@model int?
+
+<div class="display-field">
+    <label class="display-label">@ViewData.ModelMetadata.GetDisplayName()</label>
+    <div class="display-value">
+        @if (Model.HasValue)
+        {
+            @Model.Value
+        }
+        else
+        {
+            <span class="text-muted">Ni podatka</span>
+        }
+    </div>
+</div>

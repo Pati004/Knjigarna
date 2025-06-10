@@ -1,0 +1,71 @@
+﻿@model Knjigarna.Models.FormModels.EditorObrazecModel
+@{
+    ViewData["Title"] = "Pregled podatkov";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h4>Pregled registracije uporabnika (DisplayForModel)</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-success mb-4">
+                        <i class="fas fa-check-circle"></i> Obrazec je bil uspešno oddan. Spodaj je pregled vnesenih podatkov.
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card mb-4">
+                                <div class="card-header bg-secondary text-white">
+                                    <h5 class="mb-0">Osebni podatki</h5>
+                                </div>
+                                <div class="card-body display-container">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            @Html.DisplayFor(m => m.Ime)
+                                            @Html.DisplayFor(m => m.Priimek)
+                                            @Html.DisplayFor(m => m.DatumRojstva)
+                                        </div>
+                                        <div class="col-md-6">
+                                            @Html.DisplayFor(m => m.KrajRojstva)
+                                            @Html.DisplayFor(m => m.EMSO)
+                                            @Html.DisplayFor(m => m.Starost)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mb-4">
+                                <div class="card-header bg-secondary text-white">
+                                    <h5 class="mb-0">Podatki za prijavo</h5>
+                                </div>
+                                <div class="card-body display-container">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            @Html.DisplayFor(m => m.Email)
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="display-field">
+                                                <label class="display-label">Geslo</label>
+                                                <div class="display-value">
+                                                    <span class="text-muted">••••••••••</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a asp-action="ObrazecEdit" class="btn btn-primary">Nov obrazec</a>
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary ml-2">Nazaj na domačo stran</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

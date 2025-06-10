@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Spletna Knjigarna</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Spletna Knjigarna</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Domov</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownKatalog" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Katalog
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownKatalog">
+                                <a class="dropdown-item" asp-controller="Knjige" asp-action="Index">Knjige</a>
+                                <a class="dropdown-item" asp-controller="Avtorji" asp-action="Index">Avtorji</a>
+                                <a class="dropdown-item" asp-controller="Kategorije" asp-action="Index">Kategorije</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownAdmin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Administracija
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownAdmin">
+                                <h6 class="dropdown-header">Upravljanje podatkov</h6>
+                                <a class="dropdown-item" asp-controller="Uporabniki" asp-action="Index">
+                                    <i class="fas fa-users"></i> Uporabniki
+                                </a>
+                                <a class="dropdown-item" asp-controller="Knjige" asp-action="Create">
+                                    <i class="fas fa-plus"></i> Dodaj knjigo
+                                </a>
+                                <a class="dropdown-item" asp-controller="Avtorji" asp-action="Create">
+                                    <i class="fas fa-plus"></i> Dodaj avtorja
+                                </a>
+                                <a class="dropdown-item" asp-controller="Kategorije" asp-action="Create">
+                                    <i class="fas fa-plus"></i> Dodaj kategorijo
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <h6 class="dropdown-header">Poročila</h6>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-chart-bar"></i> Statistike
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownObrazci" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Obrazci
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownObrazci">
+                                <a class="dropdown-item" asp-controller="Registracija" asp-action="Korak1">Registracija (koraki)</a>
+                                <a class="dropdown-item" asp-controller="Obrazec" asp-action="Index">Registracija (zavihki)</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" asp-controller="Form" asp-action="ObrazecEdit">Registracija (EditorForModel)</a>
+                                <a class="dropdown-item" asp-controller="Form" asp-action="KnjigaEdit">Dodaj knjigo (EditorForModel)</a>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="d-flex align-items-center">
+                        <div class="current-time mr-3">
+                            <small class="text-muted" id="trenutniCas"></small>
+                        </div>
+                        <a asp-controller="Uporabniki" asp-action="Create" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-user-plus"></i> Registracija
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <script>
+        // Prikaz trenutnega časa
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleString('sl-SI');
+            document.getElementById('trenutniCas').textContent = timeString;
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; @DateTime.Now.Year - Spletna Knjigarna
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

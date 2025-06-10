@@ -1,0 +1,37 @@
+﻿@model string
+
+@{
+    var isRequired = ViewData.ModelMetadata.IsRequired;
+    var description = ViewData.ModelMetadata.Description;
+    var items = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "", Text = "-- Izberite kategorijo --" },
+        new SelectListItem { Value = "Leposlovje", Text = "Leposlovje" },
+        new SelectListItem { Value = "Znanstvena fantastika", Text = "Znanstvena fantastika" },
+        new SelectListItem { Value = "Fantazija", Text = "Fantazija" },
+        new SelectListItem { Value = "Kriminalka", Text = "Kriminalka" },
+        new SelectListItem { Value = "Zgodovinski roman", Text = "Zgodovinski roman" },
+        new SelectListItem { Value = "Biografija", Text = "Biografija" },
+        new SelectListItem { Value = "Otroške knjige", Text = "Otroške knjige" },
+        new SelectListItem { Value = "Strokovna literatura", Text = "Strokovna literatura" },
+        new SelectListItem { Value = "Poezija", Text = "Poezija" },
+        new SelectListItem { Value = "Priročniki", Text = "Priročniki" }
+    };
+}
+
+<div class="form-group">
+    <label class="control-label" for="@ViewData.ModelMetadata.PropertyName">
+        @ViewData.ModelMetadata.GetDisplayName()
+        @if (isRequired)
+        {
+            <span class="text-danger">*</span>
+        }
+    </label>
+    <select class="form-control" id="@ViewData.ModelMetadata.PropertyName" name="@ViewData.ModelMetadata.PropertyName" asp-items="items">
+    </select>
+    @if (!string.IsNullOrEmpty(description))
+    {
+        <small class="form-text text-muted">@description</small>
+    }
+    <span class="text-danger field-validation-valid" data-valmsg-for="@ViewData.ModelMetadata.PropertyName" data-valmsg-replace="true"></span>
+</div>

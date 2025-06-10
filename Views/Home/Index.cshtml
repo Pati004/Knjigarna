@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Domov";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Dobrodošli v Spletni Knjigarni</h1>
+    <p>Odkrijte svet knjig, avtorjev in različnih žanrov.</p>
+    <div class="mt-4 mb-5">
+        <a asp-controller="Registracija" asp-action="Korak1" class="btn btn-primary btn-lg">
+            <i class="fas fa-user-plus"></i> Večkoračna Registracija
+        </a>
+        <a asp-controller="Obrazec" asp-action="Index" class="btn btn-success btn-lg ml-3">
+            <i class="fas fa-tasks"></i> Obrazec z zavihki
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div id="accordion">
+            <h3>O Knjigarni</h3>
+            <div>
+                <p class="text-justify">
+                    Dobrodošli v naši spletni knjigarni, kjer lahko odkrijete široko paleto knjig različnih žanrov.
+                    Naša knjigarna ponuja bogato zbirko romanov, znanstvene fantastike, fantazijskih zgodb, klasične literature in drugih žanrov.
+                    Z nami lahko raziskujete dela svetovno priznanih avtorjev in spoznavate nove literarne zaklade.
+                </p>
+            </div>
+            <h3>Naša ponudba</h3>
+            <div>
+                <p class="text-justify">
+                    V naši knjigarni lahko najdete najnovejše uspešnice, klasična dela in skrite bisere literarnega sveta.
+                    Ponujamo knjige v različnih formatih, od tiskanih izdaj do e-knjig in zvočnih knjig.
+                    Redno osvežujemo našo zbirko z novimi izdajami in skrbimo, da so vam na voljo najkakovostnejša dela.
+                </p>
+            </div>
+            <h3>Za bralce</h3>
+            <div>
+                <p class="text-justify">
+                    Za naše zveste bralce organiziramo redna literarna srečanja, bralne klube in predstavitve knjig.
+                    Sledite našim priporočilom za branje in odkrijte nova dela, ki vas bodo navdušila.
+                    Naše strokovno osebje vam je vedno na voljo za nasvete in priporočila pri izbiri vaše naslednje knjige.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            $("#accordion").accordion({
+                collapsible: true,
+                heightStyle: "content"
+            });
+        });
+    </script>
+}

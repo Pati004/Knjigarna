@@ -1,0 +1,33 @@
+﻿@model string
+
+@{
+    var isRequired = ViewData.ModelMetadata.IsRequired;
+    var items = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "", Text = "-- Izberite kraj rojstva --" },
+        new SelectListItem { Value = "Ljubljana", Text = "Ljubljana" },
+        new SelectListItem { Value = "Maribor", Text = "Maribor" },
+        new SelectListItem { Value = "Celje", Text = "Celje" },
+        new SelectListItem { Value = "Kranj", Text = "Kranj" },
+        new SelectListItem { Value = "Koper", Text = "Koper" },
+        new SelectListItem { Value = "Novo mesto", Text = "Novo mesto" },
+        new SelectListItem { Value = "Nova Gorica", Text = "Nova Gorica" },
+        new SelectListItem { Value = "Murska Sobota", Text = "Murska Sobota" },
+        new SelectListItem { Value = "Ptuj", Text = "Ptuj" },
+        new SelectListItem { Value = "Velenje", Text = "Velenje" },
+        new SelectListItem { Value = "Tujina", Text = "Tujina" }
+    };
+}
+
+<div class="form-group">
+    <label class="control-label" for="@ViewData.ModelMetadata.PropertyName">
+        @ViewData.ModelMetadata.GetDisplayName()
+        @if (isRequired)
+        {
+            <span class="text-danger">*</span>
+        }
+    </label>
+    <select class="form-control" id="@ViewData.ModelMetadata.PropertyName" name="@ViewData.ModelMetadata.PropertyName" asp-items="items">
+    </select>
+    <span class="text-danger field-validation-valid" data-valmsg-for="@ViewData.ModelMetadata.PropertyName" data-valmsg-replace="true"></span>
+</div>
